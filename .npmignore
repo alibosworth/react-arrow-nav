@@ -1,0 +1,8 @@
+.vscode
+examples
+lib
+.babelrc
+.eslintignore
+.eslintrc
+webpack.config.js
+yarn.lock

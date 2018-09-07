@@ -1,0 +1,6 @@
+.DS_Store
+build
+examples/build
+node_modules
+*.log
+.vscode
