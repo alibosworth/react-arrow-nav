@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "esnext"],
+    "strict": true,
+    "target": "es3",
+    "jsx": "react",
+    "declaration": true,
+    "declarationDir": "es",
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  },
+  "files": ["src/index.tsx"]
+}

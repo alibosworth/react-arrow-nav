@@ -2,16 +2,6 @@
 
 A simple react component to enable keyboard navigation through it's child components.
 
-## Dependencies
-
-Depends on: [`react-shortcuts`][react-shortcuts]
-
-Inspired from: [`boundless-arrow-key-navigation`][boundless]
-
-## Demo
-
-Visit [<b>GitHub page</b>][github-page]
-
 ## Installation
 
 ```shell
@@ -34,30 +24,32 @@ import ArrowNav from "react-arrow-nav";
 class TodoItem extends React.Component {
   render() {
     <ArrowNav>
-      <div>Do Something awesome</div>
-      <div tabIndex={-1}>or</div>
-      <div>Don't use JS</div>
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <FancyItem>Item 3</FancyItem>
     </ArrowNav>;
   }
+}
+
+function FancyItem({ tabIndex, children }) {
+  return (
+    <button {...fancyProps} tabIndex={tabIndex}>
+      {children}
+    </button>
+  );
 }
 ```
 
 ### Props
 
-| name                    | Description                                                                                                                       | default value                                        |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| keymap                  | Object with keybindings to UP,DOWN,LEFT and RIGHT.<br/>For supported keys refer [Mousetrap][mousetrap]                            | `{UP: "up",DOWN: "down",LEFT: left",RIGHT: "right"}` |
-| mode                    | The direction of keyboard navigation.<br/> Could be any of <br/>- ArrowNav.BOTH<br/>- ArrowNav.VERTICAL<br/>- ArrowNav>HORIZONTAL | ArrowNav.BOTH                                        |
-| defaultActiveChildIndex | Default Active Item                                                                                                               | 0                                                    |
-| onItemFocus             | Function to invoke on focus of each item. Recieve 2 params.<br/>key:key of the item                                               | (key,position)=>{}                                   |
+- **mode**
 
-Additional props from `react-shortcuts`
+  The direction of keyboard navigation.
 
-- `className`
-- `global`
-- `isolate`
+  _default_ : `ArrowNav.VERTICAL`
 
-[react-shortcuts]: https://www.npmjs.com/package/react-shortcuts
-[boundless]: https://www.npmjs.com/package/boundless-arrow-key-navigation
-[github-page]: https://hadeeb.github.io/react-arrow-nav
-[mousetrap]: https://craig.is/killing/mice
+  values = [ `ArrowNav.VERTICAL` , `ArrowNav.HORIZONTAL` , `ArrowNav.BOTH` ]
+
+- ...any other prop will be passed to the wrapping `div` element.
+
+> If the child elements are not DOM elements, make sure they pass down `tabIndex` prop to the DOM element

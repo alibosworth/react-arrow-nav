@@ -1,6 +1,7 @@
 .DS_Store
-build
-examples/build
+lib
+es
+
 node_modules
 *.log
 .vscode

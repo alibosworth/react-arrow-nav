@@ -1,54 +1,65 @@
 {
   "name": "react-arrow-nav",
   "version": "0.0.1",
-  "description": "ArrowKey Navigation with react-shortcuts",
-  "main": "./build/index.js",
-  "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "build": "babel lib -d build",
-    "build-example": "webpack --mode production",
-    "publish-patch": "npm version patch && npm run build && npm publish",
-    "publish-minor": "npm version minor && npm run build && npm publish",
-    "publish-major": "npm version major && npm run build && npm publish",
-    "lint": "eslint ./ --fix",
-    "test": "jest",
-    "deploy": "gh-pages -d examples/build"
-  },
+  "description": "ArrowKey Navigation for react elements",
   "keywords": [
-    "react-shortcuts",
     "arrow",
+    "arrow-key",
     "navigation"
   ],
-  "author": "Hadeeb Farhan",
-  "license": "MIT",
-  "dependencies": {
-    "react-shortcuts": "~2.0.0"
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "lib",
+    "es"
+  ],
+  "scripts": {
+    "start": "webpack-dev-server --open --mode development",
+    "prebuild": "yarn clean",
+    "build": "yarn build:commonjs && yarn build:es",
+    "postbuild": "yarn types",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --extensions '.ts','.tsx'",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --extensions '.ts','.tsx'",
+    "types": "tsc",
+    "clean": "rimraf lib es",
+    "prepublishOnly": "yarn build"
   },
+  "author": "Hadeeb Farhan <hadeebfarhan1@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.6",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "eslint": "4.19.1",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-babel": "^5.1.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.17.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.10.0",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/react": "^16.8.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.4",
+    "cross-env": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
-    "prettier": "^1.13.7",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-shortcuts": "^2.0.0",
-    "webpack": "^4.16.0",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4"
+    "jest": "^24.1.0",
+    "jest-dom": "^3.0.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-testing-library": "^5.2.0",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.4.0"
   }
 }
